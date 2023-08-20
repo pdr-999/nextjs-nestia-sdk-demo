@@ -1,0 +1,4 @@
+[submodule "nestia-demo"]
+	path = nestia-demo
+	url = git@github.com:pdr-999/preact-nestia-demo.git
+	branch = "master"
