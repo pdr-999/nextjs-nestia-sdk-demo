@@ -7,7 +7,6 @@
 # the frontend run `npm i` instead.
 
 # Initialize submodule
-git submodule add git@github.com:pdr-999/nestia-demo.git && 
 git submodule init && git submodule update --remote &&
 
 # Build nestia sdk

@@ -2,10 +2,30 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import { useEffect, useState } from "react";
+import api from "@pdr-999/sdk";
+import { IBbsArticle } from "@pdr-999/sdk/lib/structures/bbs/IBbsArticle";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [articles, setArticles] = useState<IBbsArticle.ISummary[]>([]);
+  useEffect(() => {
+    api.functional.bbs.articles
+      .index(
+        {
+          host: "",
+          simulate: true,
+        },
+        "general",
+        {}
+      )
+      .then((res) => {
+        setArticles(res.data);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <>
       <Head>
@@ -14,6 +34,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {JSON.stringify(articles)}
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
           <p>
